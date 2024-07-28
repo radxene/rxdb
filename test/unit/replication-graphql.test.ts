@@ -1850,12 +1850,13 @@ describe('replication-graphql.test.ts', () => {
                 assert.ok(build);
             });
             it('should create a valid output with the underscore primary key', () => {
-                const { id: _id, ...restProperties } =  schemas.humanWithTimestamp.properties;
+                const { id: _id, ...restProperties } = schemas.humanWithTimestamp.properties;
 
                 const schema = {
                     ...schemas.humanWithTimestamp,
                     primaryKey: '_id',
-                    properties: { _id, ...restProperties }
+                    properties: { _id, ...restProperties },
+                    required: ['_id', 'name', 'age', 'updatedAt'],
                 };
 
                 const output = graphQLSchemaFromRxSchema({
